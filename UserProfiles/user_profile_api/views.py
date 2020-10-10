@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
+from rest_framework import filters
 
 from user_profile_api import serializers
 from user_profile_api import models
@@ -105,3 +106,5 @@ class ProfileViewSet(viewsets.ModelViewSet):
     queryset = models.UserProfile.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UpdateProfile,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'email',)
